@@ -1,3 +1,6 @@
+import 'package:delivey_app/models/item_cardapio.dart';
+import 'package:delivey_app/provider/itens_cardapio.dart';
+import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botao_carrinho.dart';
 import 'package:delivey_app/components/lista_itens_cardapio.dart';
@@ -5,6 +8,7 @@ import 'package:delivey_app/controller/controller_tela_principal.dart';
 import 'package:delivey_app/data/data_item_cardapio.dart';
 import 'package:delivey_app/data/data_pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
+import 'package:provider/provider.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({
@@ -14,8 +18,7 @@ class TelaPrincipal extends StatefulWidget {
   @override
   State<TelaPrincipal> createState() => _TelaPrincipalState();
 }
-final DadosPedido pedido = DadosPedido();
-final listaPedidos = pedido.dadosPedidos.toList();
+ 
  
 int qntPedidos = 0;
 
@@ -28,14 +31,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   Widget build(BuildContext context) {
     // ignore: avoid_unnecessary_containers
     final size = MediaQuery.of(context).size;
-    final itensCardapio = DADOS_ITEM_CARDAPIO.toList();
+    final providerCardapio = Provider.of<ListaItensCardapioProvider>(context);
+    final providerPedidos = Provider.of<ListaPedidosProvider>(context);
+    final List<ModelItemCardapio> itensCardapio = providerCardapio.itensCardapio;
 
-    void atualizarCarrinho(){
-   setState(() {
-     qntPedidos = listaPedidos.length;
-   });
-}
-
+  setState(() {
+    qntPedidos = providerPedidos.numeroPedidos;
+  });
+ 
     ControllerTelaPrincipal controller = ControllerTelaPrincipal();
 
     // ignore: sized_box_for_whitespace
