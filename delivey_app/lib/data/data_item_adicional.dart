@@ -1,6 +1,6 @@
 import 'package:delivey_app/models/item_adicional.dart';
 
-const DADOS_ITENS_ADICIONAIS = [
+const dadosItensAdicionais = [
   ModelItemAdicional(codigo: 'a1', titulo: 'Calabresa', valor: '1.00'),
   ModelItemAdicional(codigo: 'a2', titulo: 'Bacon', valor: '1.00'),
   ModelItemAdicional(codigo: 'a3', titulo: 'Salada', valor: '1.00'),
