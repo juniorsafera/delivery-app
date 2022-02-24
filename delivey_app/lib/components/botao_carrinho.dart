@@ -12,19 +12,22 @@ class BotaoCarrinho extends StatefulWidget {
   State<BotaoCarrinho> createState() => _BotaoCarrinhoState();
 }
 
-
 class _BotaoCarrinhoState extends State<BotaoCarrinho> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: [
-           Container(child: Icon(Icons.delivery_dining_outlined)),
+      children:  [
+        const Icon(
+          Icons.delivery_dining_outlined,
+          color: Colors.black,
+          size: 45,
+        ),
         Positioned(
           top: 0,
-          right: 0,
+          left: 0,
           child: Container(
-              width: 25,
-              height: 25,
+              width: 18,
+              height: 18,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 color: Paleta.corPrimaria,
@@ -35,6 +38,7 @@ class _BotaoCarrinhoState extends State<BotaoCarrinho> {
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               )),
         ),
