@@ -1,31 +1,35 @@
 import 'package:delivey_app/data/data_item_adicional.dart';
-import 'package:delivey_app/data/data_pedido.dart';
+import 'package:delivey_app/models/item_cardapio.dart';
+import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
+import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/lista_itens_adicionais.dart';
+import 'package:provider/provider.dart';
  
 
 import 'lista_itens_adicionais.dart';
 
 class FrameAddCarrinho {
-  final _itensAdicionais = DADOS_ITENS_ADICIONAIS.toList();
+  
 
   // ignore: non_constant_identifier_names
   void FrameAddItem(
       BuildContext context,
-      String itemTitulo,
-      String valor,
-      void Function(String pedido, List<String> adicionais, String valor)
-          addPedido) {
+      ModelItemCardapio item ,
+      ) {
     final size = MediaQuery.of(context).size;
     //final ControllerTelaPrincipal controller = ControllerTelaPrincipal();
-
-    final DadosPedido listaPedidos = DadosPedido();
-
-    _atualizarCarrinho() {
-      addPedido('pedido1', [], '12');
-    }
-
+    final _itensAdicionais = dadosItensAdicionais.toList();
+  final ModelPedido mp = ModelPedido(
+    codigo: item.codigo ,
+    pedido: item,
+    adicionais: [] ,
+    valorTotalItem: item.valor,  
+  );
+ 
+final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false);
+     
     showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
@@ -38,8 +42,8 @@ class FrameAddCarrinho {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(itemTitulo),
-                          Text(' R\$ $valor,00'),
+                          Text(mp.pedido.titulo),
+                          Text(' R\$  00,00'),
                         ],
                       ),
                     ),
@@ -106,7 +110,7 @@ class FrameAddCarrinho {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Text('TOTAL R\$ ${valor},00',
+                          Text('TOTAL R\$  00,00',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold))
                         ],
@@ -129,7 +133,10 @@ class FrameAddCarrinho {
                   ),
                 ),
                 FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                       providerPedido.adicionarItemPedido(mp);
+                       
+                    },
                     child: const Text(
                       'Adicionar',
                       style: TextStyle(fontWeight: FontWeight.bold),
