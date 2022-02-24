@@ -1,11 +1,13 @@
 import 'dart:math';
 
+import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botaoadd.dart';
 import 'package:delivey_app/components/frame_add_carrinho.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
+import 'package:provider/provider.dart';
 
 class ListaItemCardapio extends StatefulWidget {
   final List<ModelItemCardapio> itens;
@@ -19,32 +21,24 @@ class ListaItemCardapio extends StatefulWidget {
 }
 
 class _ListaItemCardapioState extends State<ListaItemCardapio> {
-  static List<ModelPedido> _Pedidos = [];
+   
+    
 
-  List<ModelPedido> get _pedidosRecentes {
-    return _Pedidos.toList();
-  }
-
-  _adicionarPedido(String pedido, List<String> adicionais, String valor) {
-    final novoPedido = ModelPedido(
-        codigo: Random().nextDouble().toString(),
-        pedido: pedido,
-        adicionais: adicionais,
-        valorTotalItem: valor);
-
-    setState(() {
-      _Pedidos.add(novoPedido);
-    });
-  }
+   
+ 
+   
 
   @override
   Widget build(BuildContext context) {
+    
+    
     final FrameAddCarrinho frame = FrameAddCarrinho();
     return Expanded(
       child: ListView.builder(
         itemCount: widget.itens.length,
         itemBuilder: (context, index) {
           final _item = widget.itens[index];
+          
           return Column(
             children: [
               Material(
@@ -52,9 +46,11 @@ class _ListaItemCardapioState extends State<ListaItemCardapio> {
                 child: InkWell(
                   onTap: () => frame.FrameAddItem(
                     context,
-                    _item.titulo,
-                    _item.valor,
-                    _adicionarPedido
+
+                    _item   
+                     
+                    
+                    
                   ),
                   child: ListTile(
                     title: Text(
