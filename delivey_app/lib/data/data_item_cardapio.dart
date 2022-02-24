@@ -1,7 +1,7 @@
 import 'package:delivey_app/models/item_cardapio.dart';
 
-// ignore: unnecessary_const, constant_identifier_names
-  final DADOS_ITEM_CARDAPIO =   [
+ 
+  final dadosItemCardapio =   [
   ModelItemCardapio(
       codigo: '001',
       titulo: 'X-BURGUER',
