@@ -1,6 +1,8 @@
+import 'package:delivey_app/models/item_cardapio.dart';
+
 class ModelPedido {
   final String codigo;
-  final String pedido;
+  final ModelItemCardapio pedido;
   final List<String> adicionais;
   final String valorTotalItem;
 
