@@ -1,5 +1,9 @@
+import 'dart:math';
+
+import 'package:delivey_app/provider/itens_adicionais.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/models/item_adicional.dart';
+import 'package:provider/provider.dart';
 
 class ListaItensAdicionais extends StatefulWidget {
   final List<ModelItemAdicional> itensAdicionais;
@@ -21,11 +25,16 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
     super.initState();
     checkMarcado = List<bool>.filled(widget.itensAdicionais.length, false);
   }
+    final id = Random.secure();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+     final _itensAdicionais =
+        Provider.of<ListaAdicionaisProvider>(context, );
+          
+     
+        
     return Container(
       width: size.width * 0.8,
       height: size.height * 0.3,
@@ -34,6 +43,10 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
           itemCount: widget.itensAdicionais.length,
           itemBuilder: (context, index) {
             final _itens = widget.itensAdicionais[index];
+           final   item = ModelItemAdicional(
+          codigo:    _itens.codigo,
+          titulo: _itens.titulo ,
+          valor: _itens.valor,);
             return Column(
               children: [
                 Material(
@@ -46,6 +59,16 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
                         setState(() {
                           checkMarcado[index] = value!;
                         });
+
+
+                        if(value == true){
+                          _itensAdicionais.adicionarItemAdicional(item);
+                        } else {
+                          _itensAdicionais.removerItemAdicional(item);
+                        }
+            
+
+
                       },
                     ),
                     trailing: Text('R\$ ${_itens.valor}'),
