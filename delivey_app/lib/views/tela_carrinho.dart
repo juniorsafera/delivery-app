@@ -35,6 +35,7 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                   itemCount: pedidos.length,
                   itemBuilder: (context, index) {
                     final _pedido = pedidos[index];
+                    final add = _pedido.adicionais.toList();
                     return
                         /* ListTile(
                     title: Text('1x ${_pedido.pedido.titulo}'),
@@ -56,13 +57,9 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                 
-                                Text(_pedido.adicionais.first.titulo ),
+                               
                               
                               
-                               Text(
-                                    _pedido.observacao,
-                                    style: TextStyle(color: Colors.red),
-                                  ),
                                  
                                 ],
                               ),
@@ -86,6 +83,27 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                               ),
                             ],
                           ),
+
+                           Container(
+                                  width: size.width,
+                                  height: 50,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: add.length,
+                                    itemBuilder: (context, i){
+                                      final ads = add[i];
+                                          return 
+                                          add.length == 0 
+                                          ? Text('')
+                                          :
+                                          Text( ads.titulo + ' -');
+                                    }),
+                                ),
+                                
+                               Text(
+                                    _pedido.observacao,
+                                    style: TextStyle(color: Colors.red),
+                                  ),
                           const Divider(),
                         ],
                       ),
