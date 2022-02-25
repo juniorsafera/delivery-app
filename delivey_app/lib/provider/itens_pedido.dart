@@ -21,10 +21,11 @@ class ListaPedidosProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removerItemPedido(String codigo) {
+  void removerItemPedido(ModelPedido pedido) {
     // ignore: list_remove_unrelated_type
-    _itens.remove(codigo);
+    _itens.remove(pedido);
     notifyListeners();
+     
   }
 
   void limpar() {
