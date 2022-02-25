@@ -144,6 +144,7 @@ class FrameAddCarrinho {
                         valorTotalItem: item.valor,
                       ));
                       Navigator.pop(context);
+                      _itensAdicionais.limpar();
                     },
                     child: const Text(
                       'Adicionar',
