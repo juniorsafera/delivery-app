@@ -29,6 +29,10 @@ class ListaAdicionaisProvider with ChangeNotifier {
     notifyListeners();
      
   }
+   void limpar() {
+    _itensSelecionados = [];
+    notifyListeners();
+  }
 
   
    
