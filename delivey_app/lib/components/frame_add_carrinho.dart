@@ -6,6 +6,7 @@ import 'package:delivey_app/data/data_item_adicional.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
+import 'package:delivey_app/provider/itens_adicionais.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/lista_itens_adicionais.dart';
@@ -19,25 +20,21 @@ class FrameAddCarrinho {
     BuildContext context,
     ModelItemCardapio item,
   ) {
-    final TextEditingController textObservacao = TextEditingController();
     final size = MediaQuery.of(context).size;
     final id = Random.secure();
-    final _itensAdicionais = dadosItensAdicionais.toList();
-    final ModelPedido mp = ModelPedido(
-      codigo: id.nextDouble().toString(),
-      pedido: item,
-      adicionais: [],
-      observacao: textObservacao.text,
-      valorTotalItem: item.valor,
-    );
+     
 
     final providerPedido =
         Provider.of<ListaPedidosProvider>(context, listen: false);
+    final _itensAdicionais =
+        Provider.of<ListaAdicionaisProvider>(context, listen: false);
+
+    final TextEditingController textObservacao = TextEditingController();
 
     showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
-              title: const  Center(child: Text('Adicionar')),
+              title: const Center(child: Text('Adicionar')),
               content: SizedBox(
                 height: size.height * 0.6,
                 child: Column(
@@ -46,8 +43,8 @@ class FrameAddCarrinho {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Text(mp.pedido.titulo),
-                          Text(' R\$  00,00'),
+                          Text(item.titulo),
+                          Text(item.valor+',00'),
                         ],
                       ),
                     ),
@@ -61,7 +58,7 @@ class FrameAddCarrinho {
                       ),
                     ),
                     ListaItensAdicionais(
-                      itensAdicionais: _itensAdicionais,
+                      itensAdicionais: _itensAdicionais.itensAdicionais,
                     ),
 
                     SizedBox(
@@ -139,7 +136,13 @@ class FrameAddCarrinho {
                 ),
                 FlatButton(
                     onPressed: () {
-                      providerPedido.adicionarItemPedido(mp);
+                      providerPedido.adicionarItemPedido(ModelPedido(
+                        codigo: id.nextDouble().toString(),
+                        pedido: item,
+                        adicionais: _itensAdicionais.itensSelecionados,
+                        observacao: textObservacao.text,
+                        valorTotalItem: item.valor,
+                      ));
                       Navigator.pop(context);
                     },
                     child: const Text(
