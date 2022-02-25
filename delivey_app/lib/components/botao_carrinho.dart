@@ -16,18 +16,21 @@ class _BotaoCarrinhoState extends State<BotaoCarrinho> {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children:  [
-        const Icon(
-          Icons.delivery_dining_outlined,
-          color: Colors.black,
-          size: 45,
+      children: [
+        Container(
+          padding: EdgeInsets.all(10),
+          child: const Icon(
+            Icons.shopping_cart_outlined,
+            color: Colors.black,
+            size: 35,
+          ),
         ),
         Positioned(
           top: 0,
-          left: 0,
+          right: 0,
           child: Container(
-              width: 18,
-              height: 18,
+              width: 20,
+              height: 20,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
                 color: Paleta.corPrimaria,
