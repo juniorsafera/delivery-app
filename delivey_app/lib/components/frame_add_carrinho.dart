@@ -1,3 +1,7 @@
+// ignore_for_file: avoid_unnecessary_containers
+
+import 'dart:math';
+
 import 'package:delivey_app/data/data_item_adicional.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
@@ -6,34 +10,34 @@ import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/lista_itens_adicionais.dart';
 import 'package:provider/provider.dart';
- 
 
 import 'lista_itens_adicionais.dart';
 
 class FrameAddCarrinho {
-  
-
   // ignore: non_constant_identifier_names
   void FrameAddItem(
-      BuildContext context,
-      ModelItemCardapio item ,
-      ) {
+    BuildContext context,
+    ModelItemCardapio item,
+  ) {
+    final TextEditingController textObservacao = TextEditingController();
     final size = MediaQuery.of(context).size;
-    //final ControllerTelaPrincipal controller = ControllerTelaPrincipal();
+    final id = Random.secure();
     final _itensAdicionais = dadosItensAdicionais.toList();
-  final ModelPedido mp = ModelPedido(
-    codigo: item.codigo ,
-    pedido: item,
-    adicionais: [] ,
-    valorTotalItem: item.valor,  
-  );
- 
-final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false);
-     
+    final ModelPedido mp = ModelPedido(
+      codigo: id.nextDouble().toString(),
+      pedido: item,
+      adicionais: [],
+      observacao: textObservacao.text,
+      valorTotalItem: item.valor,
+    );
+
+    final providerPedido =
+        Provider.of<ListaPedidosProvider>(context, listen: false);
+
     showDialog<String>(
         context: context,
         builder: (context) => AlertDialog(
-              title: const Center(child: Text('Adicionar')),
+              title: const  Center(child: Text('Adicionar')),
               content: SizedBox(
                 height: size.height * 0.6,
                 child: Column(
@@ -56,8 +60,8 @@ final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false)
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
-                     ListaItensAdicionais(
-                      itensAdicionais: _itensAdicionais  ,
+                    ListaItensAdicionais(
+                      itensAdicionais: _itensAdicionais,
                     ),
 
                     SizedBox(
@@ -89,9 +93,10 @@ final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false)
                                 padding: const EdgeInsets.all(8),
                                 decoration: BoxDecoration(
                                     border: Border.all(color: Colors.grey)),
-                                child: const TextField(
+                                child: TextField(
+                                  controller: textObservacao,
                                   maxLines: 3,
-                                  decoration: InputDecoration.collapsed(
+                                  decoration: const InputDecoration.collapsed(
                                     hintText: " ",
                                   ),
                                 ),
@@ -109,7 +114,7 @@ final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false)
                     Container(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
+                        children: const [
                           Text('TOTAL R\$  00,00',
                               style:
                                   const TextStyle(fontWeight: FontWeight.bold))
@@ -134,8 +139,8 @@ final providerPedido = Provider.of<ListaPedidosProvider>(context, listen: false)
                 ),
                 FlatButton(
                     onPressed: () {
-                       providerPedido.adicionarItemPedido(mp);
-                       
+                      providerPedido.adicionarItemPedido(mp);
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       'Adicionar',
