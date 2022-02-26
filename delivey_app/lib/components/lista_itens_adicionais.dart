@@ -50,28 +50,35 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
             return Column(
               children: [
                 Material(
-                  child: ListTile(
-                    title: CheckboxListTile(
-                      title: Text(_itens.titulo),
-                      value: checkMarcado[index],
-                      controlAffinity: ListTileControlAffinity.leading, 
-                      onChanged: (bool? value) {
-                        setState(() {
-                          checkMarcado[index] = value!;
-                        });
-
-
-                        if(value == true){
+                  child: InkWell(
+                   
+                    child: ListTile(
+                      
+                      title: CheckboxListTile(
+                        title: Text(_itens.titulo),
+                        value: checkMarcado[index],
+                        controlAffinity: ListTileControlAffinity.leading, 
+                        onChanged: (bool? value) {
+                          setState(() {
+                            checkMarcado[index] = value!;
+                          });
+                            if(checkMarcado[index] == true){
                           _itensAdicionais.adicionarItemAdicional(item);
-                        } else {
-                          _itensAdicionais.removerItemAdicional(item);
+                          
+                        } else if (checkMarcado[index]  == false) {
+                           _itensAdicionais.removerItemAdicional(item);
+                          
                         }
-            
-
-
-                      },
+                      
+                      
+                        
+                                
+                      
+                      
+                        },
+                      ),
+                      trailing: Text('R\$ ${_itens.valor}'),
                     ),
-                    trailing: Text('R\$ ${_itens.valor}'),
                   ),
                 ),
                 
