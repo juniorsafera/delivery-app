@@ -36,6 +36,7 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                   itemBuilder: (context, index) {
                     final _pedido = pedidos[index];
                     final add = _pedido.adicionais.toList();
+                    final double valorItem = double.parse(_pedido.valorTotalItem);
                     return
                         /* ListTile(
                     title: Text('1x ${_pedido.pedido.titulo}'),
@@ -67,7 +68,7 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                                 children: [
                                   Row(
                                     children: [
-                                      const Text('R\$ 00,00'),
+                                        Text(_pedido.valorTotalItem),
                                       IconButton(
                                           onPressed: () {
                                             providerPedidos
