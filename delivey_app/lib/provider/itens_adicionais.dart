@@ -21,11 +21,13 @@ class ListaAdicionaisProvider with ChangeNotifier {
 
   void adicionarItemAdicional(ModelItemAdicional item) {
     _itensSelecionados.add(item);
+    print(_itensSelecionados.length);
     notifyListeners();
   }
   void removerItemAdicional(ModelItemAdicional item) {
     // ignore: list_remove_unrelated_type
     _itensSelecionados.remove(item);
+    print(_itensSelecionados.length);
     notifyListeners();
      
   }
