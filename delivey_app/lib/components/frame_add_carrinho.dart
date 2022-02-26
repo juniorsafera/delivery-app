@@ -13,8 +13,8 @@ import 'package:delivey_app/components/lista_itens_adicionais.dart';
 import 'package:provider/provider.dart';
 
 import 'lista_itens_adicionais.dart';
-
-class FrameAddCarrinho {
+ 
+class FrameAddCarrinho   {
   // ignore: non_constant_identifier_names
   void FrameAddItem(
     BuildContext context,
@@ -144,7 +144,7 @@ class FrameAddCarrinho {
                         valorTotalItem: item.valor,
                       ));
                       Navigator.pop(context);
-                      _itensAdicionais.limpar();
+                       _itensAdicionais.limpar();
                     },
                     child: const Text(
                       'Adicionar',
