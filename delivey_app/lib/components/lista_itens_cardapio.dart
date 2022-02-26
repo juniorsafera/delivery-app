@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:delivey_app/components/modal_add_carrinho.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botaoadd.dart';
@@ -31,8 +32,16 @@ class _ListaItemCardapioState extends State<ListaItemCardapio> {
   @override
   Widget build(BuildContext context) {
     
-    
-    final FrameAddCarrinho frame = FrameAddCarrinho();
+    _abrirModalAddCarrinho( item) {
+      showModalBottomSheet(
+        isScrollControlled: true,
+          context: context,
+          builder: (_) {
+            return ModalAddCarrinho(item: item);
+          });
+    }
+
+
     return Expanded(
       child: ListView.builder(
         itemCount: widget.itens.length,
@@ -44,14 +53,7 @@ class _ListaItemCardapioState extends State<ListaItemCardapio> {
               Material(
                 color: Colors.transparent,
                 child: InkWell(
-                  onTap: () => frame.FrameAddItem(
-                    context,
-
-                    _item   
-                     
-                    
-                    
-                  ),
+                  onTap: () => _abrirModalAddCarrinho(_item),
                   child: ListTile(
                     title: Text(
                       _item.titulo,
