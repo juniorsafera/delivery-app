@@ -3,6 +3,7 @@
 import 'package:delivey_app/provider/itens_adicionais.dart';
 import 'package:delivey_app/provider/itens_cardapio.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
+import 'package:delivey_app/views/tela_adiconar_carrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/others/rotas.dart';
 import 'package:delivey_app/views/tela_carrinho.dart';
@@ -24,6 +25,7 @@ void main() {
           Rotas.home: (context) => TelaInicial(),
           Rotas.telaprincipal: (context) => TelaPrincipal(),
           Rotas.telaCarrinho: (context) => TelaCarrinho(),
+          Rotas.telaAdicionarCarrinho: (context) => TelaAdicionarCarrinho(),
         },
       ),
     ),
