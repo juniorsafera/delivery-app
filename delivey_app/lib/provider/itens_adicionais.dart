@@ -4,38 +4,35 @@ import 'package:flutter/material.dart';
 
 class ListaAdicionaisProvider with ChangeNotifier {
   List<ModelItemAdicional> _itens = dadosItensAdicionais;
-   List<ModelItemAdicional> _itensSelecionados = [];
-
+  List<ModelItemAdicional> _itensSelecionados = [];
 
   List<ModelItemAdicional> get itensAdicionais => [..._itens];
   List<ModelItemAdicional> get itensSelecionados => [..._itensSelecionados];
 
-
- double get ValorTotalItensSelecionados {
-    double valor = 0.0;
+  double get ValorTotalItensSelecionados {
+    double valor = 0;
     _itensSelecionados.forEach((element) {
       valor += double.parse(element.valor);
     });
     return valor;
+    notifyListeners();
   }
 
   void adicionarItemAdicional(ModelItemAdicional item) {
     _itensSelecionados.add(item);
-    print(_itensSelecionados.length);
+    print(ValorTotalItensSelecionados);
     notifyListeners();
   }
+
   void removerItemAdicional(ModelItemAdicional item) {
     // ignore: list_remove_unrelated_type
     _itensSelecionados.remove(item);
     print(_itensSelecionados.length);
     notifyListeners();
-     
   }
-   void limpar() {
+
+  void limpar() {
     _itensSelecionados = [];
     notifyListeners();
   }
-
-  
-   
 }
