@@ -1,11 +1,10 @@
 import 'dart:math';
 
-import 'package:delivey_app/components/modal_add_carrinho.dart';
+ 
 import 'package:delivey_app/others/rotas.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botaoadd.dart';
-import 'package:delivey_app/components/frame_add_carrinho.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
@@ -25,14 +24,7 @@ class ListaItemCardapio extends StatefulWidget {
 class _ListaItemCardapioState extends State<ListaItemCardapio> {
   @override
   Widget build(BuildContext context) {
-    _abrirModalAddCarrinho(item) {
-      showModalBottomSheet(
-          isScrollControlled: true,
-          context: context,
-          builder: (_) {
-            return ModalAddCarrinho(item: item);
-          });
-    }
+     
 
     return Expanded(
       child: ListView.builder(
