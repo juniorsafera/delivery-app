@@ -7,10 +7,11 @@ import 'package:provider/provider.dart';
 
 class ListaItensAdicionais extends StatefulWidget {
   final List<ModelItemAdicional> itensAdicionais;
-  const ListaItensAdicionais({
-    Key? key,
-    required this.itensAdicionais,
-  }) : super(key: key);
+  final void Function() valorTotal;
+
+  const ListaItensAdicionais(
+      {Key? key, required this.itensAdicionais, required this.valorTotal})
+      : super(key: key);
 
   @override
   State<ListaItensAdicionais> createState() => _ListaItensAdicionaisState();
@@ -25,69 +26,56 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
     super.initState();
     checkMarcado = List<bool>.filled(widget.itensAdicionais.length, false);
   }
-    final id = Random.secure();
+
+  final id = Random.secure();
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-     final _itensAdicionais =
-        Provider.of<ListaAdicionaisProvider>(context, );
-          
-     
-        
-    return Container(
+    final _itensAdicionais = Provider.of<ListaAdicionaisProvider>(
+      context,
+    );
+
+    return SizedBox(
       width: size.width * 0.8,
       height: size.height * 0.3,
-      child: Container(
-        child: ListView.builder(
-          itemCount: widget.itensAdicionais.length,
-          itemBuilder: (context, index) {
-            final _itens = widget.itensAdicionais[index];
-           final   item = ModelItemAdicional(
-          codigo:    _itens.codigo,
-          titulo: _itens.titulo ,
-          valor: _itens.valor,);
-            return Column(
-              children: [
-                Material(
-                  child: InkWell(
-                   
-                    child: ListTile(
-                      
-                      title: CheckboxListTile(
-                        title: Text(_itens.titulo),
-                        value: checkMarcado[index],
-                        controlAffinity: ListTileControlAffinity.leading, 
-                        onChanged: (bool? value) {
-                          setState(() {
-                            checkMarcado[index] = value!;
-                          });
-                            if(checkMarcado[index] == true){
+      child: ListView.builder(
+        itemCount: widget.itensAdicionais.length,
+        itemBuilder: (context, index) {
+          final _itens = widget.itensAdicionais[index];
+          final item = ModelItemAdicional(
+            codigo: _itens.codigo,
+            titulo: _itens.titulo,
+            valor: _itens.valor,
+          );
+          return Column(
+            children: [
+              Material(
+                child: InkWell(
+                  child: ListTile(
+                    title: CheckboxListTile(
+                      title: Text(_itens.titulo),
+                      value: checkMarcado[index],
+                      controlAffinity: ListTileControlAffinity.leading,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          checkMarcado[index] = value!;
+                        });
+                        if (checkMarcado[index] == true) {
                           _itensAdicionais.adicionarItemAdicional(item);
-                          
-                        } else if (checkMarcado[index]  == false) {
-                           _itensAdicionais.removerItemAdicional(item);
-                          
+                        } else if (checkMarcado[index] == false) {
+                          _itensAdicionais.removerItemAdicional(item);
                         }
-                      
-                      
-                        
-                                
-                      
-                      
-                        },
-                      ),
-                      trailing: Text('R\$ ${_itens.valor}'),
+                        widget.valorTotal.call();
+                      },
                     ),
+                    trailing: Text('R\$ ${_itens.valor}'),
                   ),
                 ),
-                
-                   
-              ],
-              
-            );
-          },
-        ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
