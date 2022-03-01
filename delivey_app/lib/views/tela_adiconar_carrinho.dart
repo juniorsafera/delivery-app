@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:delivey_app/components/input_observacoes.dart';
 import 'package:delivey_app/components/lista_itens_adicionais.dart';
+import 'package:delivey_app/components/totalItem.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
@@ -40,7 +41,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
     _valorTotal() {
       setState(() {
         totalItem = _itensAdicionais.ValorTotalItensSelecionados;
-        print(totalItem);
+        print(totalItem.toString());
       });
     }
 
@@ -126,7 +127,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            totalItem.toString() + 'add',
+                            totalItem.toString(),
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
@@ -135,23 +136,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                         ],
                       ),
                     ),
-/*
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 10),
-                      child: Center(
-                        child: Container(
-                            width: size.width * 0.5,
-                            height: 30,
-                            color: Paleta.corSecundaria,
-                            child: const Text(
-                              'Adicionar ao carrinho',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                            ),
-                      ),
-                    ), */
+
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
                       child: FloatingActionButton.extended(
