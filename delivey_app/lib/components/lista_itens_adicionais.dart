@@ -62,9 +62,9 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
                           checkMarcado[index] = value!;
                         });
                         if (checkMarcado[index] == true) {
-                          _itensAdicionais.adicionarItemAdicional(item);
+                          _itensAdicionais.adicionarItemAdicional(_itens);
                         } else if (checkMarcado[index] == false) {
-                          _itensAdicionais.removerItemAdicional(item);
+                          _itensAdicionais.deletar(_itens);
                         }
                         widget.valorTotal.call();
                       },
