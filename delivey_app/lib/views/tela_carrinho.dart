@@ -36,16 +36,12 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                   itemBuilder: (context, index) {
                     final _pedido = pedidos[index];
                     final add = _pedido.adicionais.toList();
-                    final double valorItem = double.parse(_pedido.valorTotalItem);
-                    return
-                        /* ListTile(
-                    title: Text('1x ${_pedido.pedido.titulo}'),
-                    subtitle: Text('Adicionais: ${_pedido.adicionais.toString().replaceAll('[', ' ').replaceAll(']', ' ')}'),
-                    trailing: TrailingItemCarrinho(valorItem: _pedido.valorTotalItem)          
-                  ); */
-                        Container(
+                    final double valorItem =
+                        double.parse(_pedido.valorTotalItem);
+                    return Container(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,18 +53,15 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                                     style:
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                                
-                               
-                              
-                              
-                                 
                                 ],
                               ),
                               Column(
                                 children: [
                                   Row(
                                     children: [
-                                        Text(_pedido.valorTotalItem),
+                                      Text('R\$ ' +
+                                          _pedido.valorTotalItem +
+                                          ',00'),
                                       IconButton(
                                           onPressed: () {
                                             providerPedidos
@@ -84,27 +77,25 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
                               ),
                             ],
                           ),
-
-                           Container(
+                          add.length == 0
+                              ? Text('')
+                              : Container(
                                   width: size.width,
-                                  height: 50,
+                                  height: 30,
                                   child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    itemCount: add.length,
-                                    itemBuilder: (context, i){
-                                      final ads = add[i];
-                                          return 
-                                          add.length == 0 
-                                          ? Text('')
-                                          :
-                                          Text( ads.titulo + ' -');
-                                    }),
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: add.length,
+                                      itemBuilder: (context, i) {
+                                        final ads = add[i];
+                                        return add.length == 0
+                                            ? Text('')
+                                            : Text(ads.titulo + ' -');
+                                      }),
                                 ),
-                                
-                               Text(
-                                    _pedido.observacao,
-                                    style: TextStyle(color: Colors.red),
-                                  ),
+                          Text(
+                            _pedido.observacao,
+                            style: TextStyle(color: Colors.red),
+                          ),
                           const Divider(),
                         ],
                       ),
