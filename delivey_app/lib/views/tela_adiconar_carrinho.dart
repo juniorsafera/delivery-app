@@ -23,14 +23,12 @@ class TelaAdicionarCarrinho extends StatefulWidget {
 }
 
 class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
+  double totalItem = 0;
+
   @override
   Widget build(BuildContext context) {
     final itemCardapio =
         ModalRoute.of(context)!.settings.arguments as ModelItemCardapio;
-
-    final size = MediaQuery.of(context).size;
-    final id = Random.secure();
-    double totalItem = 0;
 
     final providerPedido =
         Provider.of<ListaPedidosProvider>(context, listen: false);
@@ -38,11 +36,22 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
         Provider.of<ListaAdicionaisProvider>(context, listen: false);
 
     final TextEditingController textObservacao = TextEditingController();
-    _valorTotal() {
+
+    final size = MediaQuery.of(context).size;
+    final id = Random.secure();
+    double total = double.parse(itemCardapio.valor) + totalItem;
+
+    _valorTotalItemAdicional() {
       setState(() {
         totalItem = _itensAdicionais.ValorTotalItensSelecionados;
-        print(totalItem.toString());
       });
+    }
+
+    _valorTotal() {
+      setState(() {
+        totalItem += double.parse(itemCardapio.valor);
+      });
+      return totalItem;
     }
 
     return Scaffold(
@@ -92,11 +101,19 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                     ),
 
                     // Definindo área de adicionais
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'Adicionais',
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            totalItem++;
+                          });
+                          print(totalItem);
+                        },
+                        child: const Text(
+                          'Adicionais',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     Expanded(
@@ -105,7 +122,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         child: ListaItensAdicionais(
                           itensAdicionais: _itensAdicionais.itensAdicionais,
-                          valorTotal: _valorTotal,
+                          valorTotal: _valorTotalItemAdicional,
                         ),
                       ),
                     ),
@@ -127,7 +144,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            totalItem.toString(),
+                            'R\$ ' + total.toString() + ',00',
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
