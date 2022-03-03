@@ -1,12 +1,12 @@
+import 'package:delivey_app/data/data_categorias.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 
- 
-  final dadosItemCardapio =   [
+final dadosItemCardapio = [
   ModelItemCardapio(
       codigo: '001',
       titulo: 'X-BURGUER',
       itens: ['pão', 'hambúrguer', 'maionese artesenal', 'queijo', 'presunto'],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '14'),
   ModelItemCardapio(
       codigo: '002',
@@ -17,7 +17,7 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'maionese artesenal',
         'queijo, presunto, alface, tomate, milho, ervilha, batata palha'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '18'),
   ModelItemCardapio(
       codigo: '003',
@@ -35,7 +35,7 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'ervilha',
         'batata'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '20'),
   ModelItemCardapio(
       codigo: '004',
@@ -53,7 +53,7 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'ervilha',
         'batata'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '21'),
   ModelItemCardapio(
       codigo: '005',
@@ -71,7 +71,7 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'ervilha',
         'batata'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '22'),
   ModelItemCardapio(
       codigo: '006',
@@ -88,7 +88,7 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'ervilha',
         'batata'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '14'),
   ModelItemCardapio(
       codigo: '007',
@@ -105,6 +105,6 @@ import 'package:delivey_app/models/item_cardapio.dart';
         'ervilha',
         'batata'
       ],
-      categoria: 'hamburguer',
+      categorias: [dadosCategorias[1]],
       valor: '14'),
 ];
