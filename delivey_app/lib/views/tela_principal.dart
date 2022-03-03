@@ -91,17 +91,17 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       bottomRight: Radius.circular(0),
                     ),
                   ),
-                  child: Column(
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      // ignore: avoid_unnecessary_containers
-                      Container(
-                        child: ListaItemCardapio(
-                          itens: itensCardapio,
-                        ),                   
-                      )
-                    ],
-                  ),
+                  child:  ListView.builder(
+                    itemCount: 4,
+                    itemBuilder: (context, index){
+                      if(index.isOdd){
+                          return Text('Categoria');
+                      }else {
+                          return Text('itens');
+                      }
+
+                  })
+                  
                 ),
               ),
             ],
