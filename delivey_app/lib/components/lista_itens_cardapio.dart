@@ -12,9 +12,11 @@ import 'package:provider/provider.dart';
 
 class ListaItemCardapio extends StatefulWidget {
   final List<ModelItemCardapio> itens;
+   
   const ListaItemCardapio({
     Key? key,
     required this.itens,
+    
   }) : super(key: key);
 
   @override
