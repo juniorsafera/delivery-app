@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:delivey_app/provider/categorias.dart';
 import 'package:delivey_app/provider/itens_adicionais.dart';
 import 'package:delivey_app/provider/itens_cardapio.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
@@ -15,9 +16,18 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider( create: (_) => ListaItensCardapioProvider(),),
-        ChangeNotifierProvider( create: (_) => ListaAdicionaisProvider(),),
-        ChangeNotifierProvider( create: (_) => ListaPedidosProvider(),),
+        ChangeNotifierProvider(
+          create: (_) => ListaItensCardapioProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ListaCategoriasProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ListaAdicionaisProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => ListaPedidosProvider(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
