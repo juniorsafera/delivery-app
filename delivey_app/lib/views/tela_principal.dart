@@ -1,4 +1,6 @@
+import 'package:delivey_app/models/categorias.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
+import 'package:delivey_app/provider/categorias.dart';
 import 'package:delivey_app/provider/itens_cardapio.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
@@ -18,97 +20,112 @@ class TelaPrincipal extends StatefulWidget {
   @override
   State<TelaPrincipal> createState() => _TelaPrincipalState();
 }
- 
- 
-int qntPedidos = 0;
 
+int qntPedidos = 0;
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
-   
-
   @override
   Widget build(BuildContext context) {
     // ignore: avoid_unnecessary_containers
     final size = MediaQuery.of(context).size;
+    final providerCategorias = Provider.of<ListaCategoriasProvider>(context);
     final providerCardapio = Provider.of<ListaItensCardapioProvider>(context);
     final providerPedidos = Provider.of<ListaPedidosProvider>(context);
-    final List<ModelItemCardapio> itensCardapio = providerCardapio.itensCardapio;
+    final List<ModelItemCardapio> itensCardapio =
+        providerCardapio.itensCardapio;
+    final List<ModelCategoria> itensCategoria =
+        providerCategorias.itensCategoria;
 
-  setState(() {
-    qntPedidos = providerPedidos.numeroPedidos;
-  });
- 
+    setState(() {
+      qntPedidos = providerPedidos.numeroPedidos;
+    });
+
     ControllerTelaPrincipal controller = ControllerTelaPrincipal();
-
+    List<String> it = [];
+    for (int i = 0; i < itensCategoria.length; i++) {
+      it.add(itensCategoria[i].titulo);
+    }
     // ignore: sized_box_for_whitespace
-    return Scaffold(
-      body: SizedBox(
-        width: size.width,
-        child: Column(
-          children: [
-            SizedBox(
-              height: size.height * 0.03,
-            ),
-            // ignore: sized_box_for_whitespace
-            Container(
-              height: size.height * 0.1,
-              child:const Text('LOGO'),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+    return DefaultTabController(
+      length: itensCategoria.length,
+      child: Scaffold(
+        body: SizedBox(
+          width: size.width,
+          child: Column(
+            children: [
+              SizedBox(
+                height: size.height * 0.03,
+              ),
+              // ignore: sized_box_for_whitespace
+              Container(
+                height: size.height * 0.1,
+                child: const Text('LOGO'),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
 
-            // ÁREA DE LISTA DE ITENS DO CARDÁPIO
-
-            Expanded(
-              child: Container(
+              Container(
                 width: size.width,
-                height: size.height * 0.5,
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(50),
-                    topRight: Radius.circular(50),
-                    bottomLeft: Radius.circular(0),
-                    bottomRight: Radius.circular(0),
+                padding: EdgeInsets.all(18),
+                child: TabBar(
+                  labelColor: Paleta.corPrimaria,
+                  unselectedLabelColor: Colors.black,
+                  isScrollable: true,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      25.0,
+                    ),
+                  ),
+                  tabs: List.generate(
+                    itensCategoria.length,
+                    (index) => Text(it[index]),
                   ),
                 ),
-                child: Column(
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Text(
-                        'HAMBÚRGUER',
-                        style: TextStyle(
-                            color: Paleta.corPrimaria,
-                            fontSize: 24,
-                            decoration: TextDecoration.none),
-                      ),
+              ),
+
+              // ÁREA DE LISTA DE ITENS DO CARDÁPIO
+
+              Expanded(
+                child: Container(
+                  width: size.width,
+                  height: size.height * 0.5,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
                     ),
-                    // ignore: avoid_unnecessary_containers
-                    Container(
-                      child: ListaItemCardapio(
-                        itens: itensCardapio,
-                      ),
-                    )
-                  ],
+                  ),
+                  child: Column(
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      // ignore: avoid_unnecessary_containers
+                      Container(
+                        child: ListaItemCardapio(
+                          itens: itensCardapio,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.white,
+            onPressed: () {
+              controller.abrirTelaCarrinho(context);
+            },
+            child: BotaoCarrinho(
+              numeroPedidos: qntPedidos.toString(),
+            )),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.white,
-          onPressed: () {
-            controller.abrirTelaCarrinho(context);
-          },
-          child: BotaoCarrinho(
-            numeroPedidos: qntPedidos.toString(),
-          )),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
     );
   }
 }
