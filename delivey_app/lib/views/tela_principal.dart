@@ -42,10 +42,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     });
 
     ControllerTelaPrincipal controller = ControllerTelaPrincipal();
-    List<String> it = [];
-    for (int i = 0; i < itensCategoria.length; i++) {
-      it.add(itensCategoria[i].titulo);
-    }
+     
     // ignore: sized_box_for_whitespace
     return DefaultTabController(
       length: itensCategoria.length,
@@ -58,13 +55,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 height: size.height * 0.03,
               ),
               // ignore: sized_box_for_whitespace
-              Container(
-                height: size.height * 0.1,
-                child: const Text('LOGO'),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              
 
               Container(
                 width: size.width,
@@ -80,7 +71,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   ),
                   tabs: List.generate(
                     itensCategoria.length,
-                    (index) => Text(it[index]),
+                    (index) => Text(itensCategoria[index].titulo),
                   ),
                 ),
               ),
@@ -107,7 +98,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       Container(
                         child: ListaItemCardapio(
                           itens: itensCardapio,
-                        ),
+                        ),                   
                       )
                     ],
                   ),
