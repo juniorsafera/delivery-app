@@ -77,47 +77,37 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
               // ÁREA DE LISTA DE ITENS DO CARDÁPIO
 
-              Expanded(
-                child: Container(
-                    width: size.width,
-                    height: size.height * 0.5,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                      ),
+              Container(
+                  width: size.width,
+                  height: size.height * 0.5,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
                     ),
+                  ),
+                  child: Container(
+                    height: 100,
                     child: ListView.builder(
                         itemCount: itensCategoria.length,
                         itemBuilder: (context, index) {
+                          final categoria = itensCategoria[index];
                           if (index.isOdd) {
-                            return Expanded(
-                              child: Container(
-                                child: ListView.builder(
-                                    itemCount: itensCategoria.length,
-                                    itemBuilder: (context, index) {
-                                      final catg = itensCategoria[index];
-                                      return Text(catg.titulo);
-                                    }),
-                              ),
-                            );
+                            return Text(categoria.titulo);
                           } else {
-                            return Expanded(
-                              child: Container(
-                                child: ListView.builder(
-                                    itemCount: itensCardapio.length,
-                                    itemBuilder: (context, index) {
-                                      final card = itensCardapio[index];
-                                      return Text(card.titulo);
-                                    }),
-                              ),
-                            );
+                            print('contem: ' + categoria.titulo);
+                            return Container(
+                                height: 300,
+                                child: ListaItemCardapio(
+                                  itens: itensCardapio,
+                                  categoria: categoria,
+                                ));
                           }
-                        })),
-              ),
+                        }),
+                  )),
             ],
           ),
         ),
