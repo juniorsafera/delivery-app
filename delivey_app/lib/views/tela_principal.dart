@@ -42,7 +42,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     });
 
     ControllerTelaPrincipal controller = ControllerTelaPrincipal();
-     
+
     // ignore: sized_box_for_whitespace
     return DefaultTabController(
       length: itensCategoria.length,
@@ -55,7 +55,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 height: size.height * 0.03,
               ),
               // ignore: sized_box_for_whitespace
-              
 
               Container(
                 width: size.width,
@@ -80,29 +79,44 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
               Expanded(
                 child: Container(
-                  width: size.width,
-                  height: size.height * 0.5,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
+                    width: size.width,
+                    height: size.height * 0.5,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                      ),
                     ),
-                  ),
-                  child:  ListView.builder(
-                    itemCount: 4,
-                    itemBuilder: (context, index){
-                      if(index.isOdd){
-                          return Text('Categoria');
-                      }else {
-                          return Text('itens');
-                      }
-
-                  })
-                  
-                ),
+                    child: ListView.builder(
+                        itemCount: itensCategoria.length,
+                        itemBuilder: (context, index) {
+                          if (index.isOdd) {
+                            return Expanded(
+                              child: Container(
+                                child: ListView.builder(
+                                    itemCount: itensCategoria.length,
+                                    itemBuilder: (context, index) {
+                                      final catg = itensCategoria[index];
+                                      return Text(catg.titulo);
+                                    }),
+                              ),
+                            );
+                          } else {
+                            return Expanded(
+                              child: Container(
+                                child: ListView.builder(
+                                    itemCount: itensCardapio.length,
+                                    itemBuilder: (context, index) {
+                                      final card = itensCardapio[index];
+                                      return Text(card.titulo);
+                                    }),
+                              ),
+                            );
+                          }
+                        })),
               ),
             ],
           ),
