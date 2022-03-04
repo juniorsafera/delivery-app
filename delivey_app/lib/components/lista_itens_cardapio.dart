@@ -1,6 +1,6 @@
 import 'dart:math';
 
- 
+import 'package:delivey_app/models/categorias.dart';
 import 'package:delivey_app/others/rotas.dart';
 import 'package:delivey_app/provider/itens_pedido.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +12,12 @@ import 'package:provider/provider.dart';
 
 class ListaItemCardapio extends StatefulWidget {
   final List<ModelItemCardapio> itens;
-   
+  final ModelCategoria categoria;
+
   const ListaItemCardapio({
     Key? key,
     required this.itens,
-    
+    required this.categoria,
   }) : super(key: key);
 
   @override
@@ -26,13 +27,15 @@ class ListaItemCardapio extends StatefulWidget {
 class _ListaItemCardapioState extends State<ListaItemCardapio> {
   @override
   Widget build(BuildContext context) {
-     
-
     return Expanded(
       child: ListView.builder(
         itemCount: widget.itens.length,
         itemBuilder: (context, index) {
-          final _item = widget.itens[index];
+          final ct = widget.itens.where((element) {
+            print(widget.categoria.titulo);
+            return element.categorias.contains(widget.categoria);
+          }).toList();
+          final _item = ct[index];
 
           return Column(
             children: [
