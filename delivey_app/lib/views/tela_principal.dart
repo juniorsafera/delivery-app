@@ -22,6 +22,7 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 int qntPedidos = 0;
+ 
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
@@ -36,6 +37,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         providerCardapio.itensCardapio;
     final List<ModelCategoria> itensCategoria =
         providerCategorias.itensCategoria;
+     final nomeCategoria = itensCategoria[0].titulo;
 
     setState(() {
       qntPedidos = providerPedidos.numeroPedidos;
@@ -58,7 +60,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
               Container(
                 width: size.width,
-                padding: EdgeInsets.all(18),
+                padding:const EdgeInsets.all(18),
                 child: TabBar(
                   labelColor: Paleta.corPrimaria,
                   unselectedLabelColor: Colors.black,
@@ -71,43 +73,28 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   tabs: List.generate(
                     itensCategoria.length,
                     (index) => Text(itensCategoria[index].titulo),
+                  //  nomeCategoria = itensCategoria[index].titulo;
                   ),
                 ),
               ),
 
               // ÁREA DE LISTA DE ITENS DO CARDÁPIO
 
-              Container(
-                  width: size.width,
-                  height: size.height * 0.5,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
+              Expanded(
+                child: Container(
+                    width: size.width,
+                    height: size.height * 0.5,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                      ),
                     ),
-                  ),
-                  child: Container(
-                    height: 100,
-                    child: ListView.builder(
-                        itemCount: itensCategoria.length,
-                        itemBuilder: (context, index) {
-                          final categoria = itensCategoria[index];
-                          if (index.isOdd) {
-                            return Text(categoria.titulo);
-                          } else {
-                            print('contem: ' + categoria.titulo);
-                            return Container(
-                                height: 300,
-                                child: ListaItemCardapio(
-                                  itens: itensCardapio,
-                                  categoria: categoria,
-                                ));
-                          }
-                        }),
-                  )),
+                    child: ListaItemCardapio(itens: itensCardapio, categoria: nomeCategoria )),
+              ),
             ],
           ),
         ),
