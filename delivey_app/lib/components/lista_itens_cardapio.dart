@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 
 class ListaItemCardapio extends StatefulWidget {
   final List<ModelItemCardapio> itens;
-  final ModelCategoria categoria;
+  final String categoria;
 
   const ListaItemCardapio({
     Key? key,
@@ -27,16 +27,15 @@ class ListaItemCardapio extends StatefulWidget {
 class _ListaItemCardapioState extends State<ListaItemCardapio> {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
+    return Container(
       child: ListView.builder(
         itemCount: widget.itens.length,
         itemBuilder: (context, index) {
-          final ct = widget.itens.where((element) {
-            print(widget.categoria.titulo);
-            return element.categorias.contains(widget.categoria);
-          }).toList();
-          final _item = ct[index];
-
+          final List<ModelItemCardapio> lista = widget.itens
+              .where((e) =>
+                  e.categorias.contains(widget.categoria)   )
+              .toList();
+          final _item = lista[index];
           return Column(
             children: [
               Material(
