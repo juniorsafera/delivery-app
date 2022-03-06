@@ -1,10 +1,9 @@
-import 'package:delivey_app/models/categorias.dart';
 
 class ModelItemCardapio {
   final String codigo;
   final String titulo;
   final List<String> itens;
-  final List<ModelCategoria> categorias;
+  final List<String> categorias;
   final String valor;
   bool disponivel;
 
