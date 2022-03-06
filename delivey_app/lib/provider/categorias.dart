@@ -1,5 +1,7 @@
 
 
+// ignore_for_file: prefer_final_fields
+
 import 'package:delivey_app/data/data_categorias.dart';
 import 'package:delivey_app/models/categorias.dart';
 import 'package:flutter/material.dart';
