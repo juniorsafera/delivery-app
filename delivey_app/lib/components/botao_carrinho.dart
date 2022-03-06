@@ -18,7 +18,7 @@ class _BotaoCarrinhoState extends State<BotaoCarrinho> {
     return Stack(
       children: [
         Container(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: const Icon(
             Icons.shopping_cart_outlined,
             color: Colors.black,
