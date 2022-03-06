@@ -29,7 +29,7 @@ class TelaInicial extends StatelessWidget {
           children: [
             // ignore: avoid_unnecessary_containers
             Container(
-              child: Text("LOGO"),
+              child: const Text("LOGO"),
             ),
             const SizedBox(
               height: 50,
