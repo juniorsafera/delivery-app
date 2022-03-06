@@ -4,7 +4,6 @@ import 'dart:math';
 
 import 'package:delivey_app/components/input_observacoes.dart';
 import 'package:delivey_app/components/lista_itens_adicionais.dart';
-import 'package:delivey_app/components/totalItem.dart';
 import 'package:delivey_app/models/item_cardapio.dart';
 import 'package:delivey_app/models/pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
@@ -47,20 +46,13 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
       });
     }
 
-    _valorTotal() {
-      setState(() {
-        totalItem += double.parse(itemCardapio.valor);
-      });
-      return totalItem;
-    }
-
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: Text('Adicionar'),
+          title: const Text('Adicionar'),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black),
-      body: Container(
+      body: SizedBox(
         width: size.width,
         height: size.height,
         //padding: const EdgeInsets.all(30),
@@ -108,7 +100,6 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                           setState(() {
                             totalItem++;
                           });
-                          print(totalItem);
                         },
                         child: const Text(
                           'Adicionais',
@@ -131,7 +122,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
 
                     Expanded(
                         flex: 1,
-                        child: Container(
+                        child: SizedBox(
                             width: size.width * 0.9,
                             child: InputObservacoes(
                                 textObservacao: textObservacao))),
@@ -164,7 +155,7 @@ class _TelaAdicionarCarrinhoState extends State<TelaAdicionarCarrinho> {
                             pedido: itemCardapio,
                             adicionais: _itensAdicionais.itensSelecionados,
                             observacao: textObservacao.text,
-                            valorTotalItem: itemCardapio.valor,
+                            valorTotalItem: total.toString(),
                           ));
                           Navigator.pop(context);
                           _itensAdicionais.limpar();
