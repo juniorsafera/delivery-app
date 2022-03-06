@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+ // ignore_for_file: file_names
+
+ import 'package:flutter/material.dart';
 
 class TotalItem extends StatefulWidget {
   final String data;
@@ -13,8 +15,6 @@ class TotalItem extends StatefulWidget {
 class _TotalItemState extends State<TotalItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text(widget.data),
-    );
+    return Text(widget.data);
   }
 }
