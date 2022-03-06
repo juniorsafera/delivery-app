@@ -22,6 +22,7 @@ List<bool> checkMarcado = [false];
 class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     super.initState();
     checkMarcado = List<bool>.filled(widget.itensAdicionais.length, false);
@@ -43,11 +44,6 @@ class _ListaItensAdicionaisState extends State<ListaItensAdicionais> {
         itemCount: widget.itensAdicionais.length,
         itemBuilder: (context, index) {
           final _itens = widget.itensAdicionais[index];
-          final item = ModelItemAdicional(
-            codigo: _itens.codigo,
-            titulo: _itens.titulo,
-            valor: _itens.valor,
-          );
           return Column(
             children: [
               Material(
