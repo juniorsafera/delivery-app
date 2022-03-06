@@ -12,7 +12,7 @@ class ListaPedidos extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 50,
           child: ListView.builder(
             itemCount: pedidos.length,
