@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botao_carrinho.dart';
 import 'package:delivey_app/components/lista_itens_cardapio.dart';
 import 'package:delivey_app/controller/controller_tela_principal.dart';
-import 'package:delivey_app/data/data_item_cardapio.dart';
-import 'package:delivey_app/data/data_pedido.dart';
 import 'package:delivey_app/others/paleta_cores.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +20,6 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 int qntPedidos = 0;
- 
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
@@ -37,13 +34,21 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         providerCardapio.itensCardapio;
     final List<ModelCategoria> itensCategoria =
         providerCategorias.itensCategoria;
-     final nomeCategoria = itensCategoria[0].titulo;
 
     setState(() {
       qntPedidos = providerPedidos.numeroPedidos;
     });
 
     ControllerTelaPrincipal controller = ControllerTelaPrincipal();
+
+    final _views = List.generate(
+      itensCategoria.length,
+      (index) {
+        return ListaItemCardapio(
+            itens: itensCardapio, categoria: itensCategoria[index].id);
+      },
+      //  nomeCategoria = itensCategoria[index].titulo;
+    );
 
     // ignore: sized_box_for_whitespace
     return DefaultTabController(
@@ -60,7 +65,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
               Container(
                 width: size.width,
-                padding:const EdgeInsets.all(18),
+                padding: const EdgeInsets.all(18),
                 child: TabBar(
                   labelColor: Paleta.corPrimaria,
                   unselectedLabelColor: Colors.black,
@@ -72,8 +77,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                   ),
                   tabs: List.generate(
                     itensCategoria.length,
-                    (index) => Text(itensCategoria[index].titulo),
-                  //  nomeCategoria = itensCategoria[index].titulo;
+                    (index) {
+                      return Tab(
+                        text: itensCategoria[index].titulo,
+                      );
+                    },
+                    //  nomeCategoria = itensCategoria[index].titulo;
                   ),
                 ),
               ),
@@ -82,18 +91,22 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
               Expanded(
                 child: Container(
-                    width: size.width,
-                    height: size.height * 0.5,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(50),
-                        topRight: Radius.circular(50),
-                        bottomLeft: Radius.circular(0),
-                        bottomRight: Radius.circular(0),
-                      ),
+                  width: size.width,
+                  height: size.height * 0.5,
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(50),
+                      topRight: Radius.circular(50),
+                      bottomLeft: Radius.circular(0),
+                      bottomRight: Radius.circular(0),
                     ),
-                    child: ListaItemCardapio(itens: itensCardapio, categoria: nomeCategoria )),
+                  ),
+                  child: TabBarView(
+                    children: _views,
+                  ),
+                ),
               ),
             ],
           ),
