@@ -60,13 +60,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             child: Column(
               children: [
                 SizedBox(
-                  height: size.height * 0.03,
+                  height: size.height * 0.06,
                 ),
                 // ignore: sized_box_for_whitespace
-        
+
                 Container(
                   width: size.width,
-                  padding: const EdgeInsets.all(18),
+                  padding: const EdgeInsets.all(15),
                   child: TabBar(
                     labelColor: Paleta.corPrimaria,
                     unselectedLabelColor: Colors.black,
@@ -87,14 +87,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     ),
                   ),
                 ),
-        
+
                 // ÁREA DE LISTA DE ITENS DO CARDÁPIO
-        
+
                 Expanded(
                   child: Container(
                     width: size.width,
                     height: size.height * 0.5,
-                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    //padding: const EdgeInsets.symmetric(vertical: 20),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
