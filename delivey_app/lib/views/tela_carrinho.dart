@@ -149,6 +149,22 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
             ],
           ),
         );
+      } else if(_cartao== false && trocoControl.text.isEmpty){
+          showDialog<void>(
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+            title: const Text('Atenção'),
+            content: const Text('Informe todos os dados corretamente*!'),
+            actions: <Widget>[
+              FlatButton(
+                child: const Text('Ok'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        );
       } else {
         prepararEnviarPedido();
       }
