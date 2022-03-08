@@ -58,13 +58,16 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
           '*Complemento:* ${complementoControl.text} \n';
       String pagamento = 'TROCO PARA R\$ ${trocoControl.text}';
       String taxaEntrega = '*Taxa Entrega R\$ 5,00 \n';
+      String total =
+          '*Valor Total R\$ ${providerPedidos.ValorTotalPedidos + 5}*,00 \n';
 
       if (_entrega == false) {
         entregar = '*Retirar no local*';
         taxaEntrega = '';
-      }
+        total = '*Valor Total R\$ ${providerPedidos.ValorTotalPedidos}* ,00\n';
+      }  
       if (_cartao == true) {
-        entregar = 'Cartão';
+        pagamento = 'Cartão';
       }
 
       for (int ip = 0; ip < pedidos.length; ip++) {
@@ -88,9 +91,9 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
           entregar +
           '\n' +
           taxaEntrega +
-          '\n'
-              '*Valor Total R\$ ${providerPedidos.ValorTotalPedidos + 5}* \n'
-              '*Tipo Pagamento:* $pagamento';
+          '\n' +
+          total +
+          '*Tipo Pagamento:* $pagamento';
 
       String texto = Uri.encodeComponent(mensagem);
       _enviar(texto);
@@ -149,12 +152,13 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
             ],
           ),
         );
-      } else if(_cartao== false && trocoControl.text.isEmpty){
-          showDialog<void>(
+      } else if (_cartao == false && trocoControl.text.isEmpty  
+          ) {
+        showDialog<void>(
           context: context,
           builder: (BuildContext context) => AlertDialog(
             title: const Text('Atenção'),
-            content: const Text('Informe todos os dados corretamente*!'),
+            content: const Text('Informe todos os dados corretamente!'),
             actions: <Widget>[
               FlatButton(
                 child: const Text('Ok'),
@@ -164,8 +168,7 @@ class _TelaCarrinhoState extends State<TelaCarrinho> {
               ),
             ],
           ),
-        );
-      } else {
+        );} else {
         prepararEnviarPedido();
       }
     }
