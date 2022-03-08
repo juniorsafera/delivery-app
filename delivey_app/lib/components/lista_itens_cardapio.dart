@@ -1,4 +1,3 @@
-
 import 'package:delivey_app/others/rotas.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/components/botaoadd.dart';
@@ -37,6 +36,14 @@ class _ListaItemCardapioState extends State<ListaItemCardapio> {
                 onTap: () => Navigator.of(context)
                     .pushNamed(Rotas.telaAdicionarCarrinho, arguments: _item),
                 child: ListTile(
+                  leading: SizedBox(
+                    width: 80,
+                    height: 80,
+                    child: Image.network(
+                      _item.urlImagem,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                   title: Text(
                     _item.titulo,
                     style: const TextStyle(
