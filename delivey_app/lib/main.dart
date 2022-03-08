@@ -32,7 +32,7 @@ void main() {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          Rotas.home: (context) => TelaInicial(),
+          Rotas.home: (context) => TelaPrincipal(),
           Rotas.telaprincipal: (context) => TelaPrincipal(),
           Rotas.telaCarrinho: (context) => TelaCarrinho(),
           Rotas.telaAdicionarCarrinho: (context) => TelaAdicionarCarrinho(),
