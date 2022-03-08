@@ -54,61 +54,63 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
     return DefaultTabController(
       length: itensCategoria.length,
       child: Scaffold(
-        body: SizedBox(
-          width: size.width,
-          child: Column(
-            children: [
-              SizedBox(
-                height: size.height * 0.03,
-              ),
-              // ignore: sized_box_for_whitespace
-
-              Container(
-                width: size.width,
-                padding: const EdgeInsets.all(18),
-                child: TabBar(
-                  labelColor: Paleta.corPrimaria,
-                  unselectedLabelColor: Colors.black,
-                  isScrollable: true,
-                  indicator: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      25.0,
-                    ),
-                  ),
-                  tabs: List.generate(
-                    itensCategoria.length,
-                    (index) {
-                      return Tab(
-                        text: itensCategoria[index].titulo,
-                      );
-                    },
-                    //  nomeCategoria = itensCategoria[index].titulo;
-                  ),
+        body: SafeArea(
+          child: SizedBox(
+            width: size.width,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: size.height * 0.03,
                 ),
-              ),
-
-              // ÁREA DE LISTA DE ITENS DO CARDÁPIO
-
-              Expanded(
-                child: Container(
+                // ignore: sized_box_for_whitespace
+        
+                Container(
                   width: size.width,
-                  height: size.height * 0.5,
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(0),
+                  padding: const EdgeInsets.all(18),
+                  child: TabBar(
+                    labelColor: Paleta.corPrimaria,
+                    unselectedLabelColor: Colors.black,
+                    isScrollable: true,
+                    indicator: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        25.0,
+                      ),
+                    ),
+                    tabs: List.generate(
+                      itensCategoria.length,
+                      (index) {
+                        return Tab(
+                          text: itensCategoria[index].titulo,
+                        );
+                      },
+                      //  nomeCategoria = itensCategoria[index].titulo;
                     ),
                   ),
-                  child: TabBarView(
-                    children: _views,
+                ),
+        
+                // ÁREA DE LISTA DE ITENS DO CARDÁPIO
+        
+                Expanded(
+                  child: Container(
+                    width: size.width,
+                    height: size.height * 0.5,
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(50),
+                        topRight: Radius.circular(50),
+                        bottomLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(0),
+                      ),
+                    ),
+                    child: TabBarView(
+                      children: _views,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(
