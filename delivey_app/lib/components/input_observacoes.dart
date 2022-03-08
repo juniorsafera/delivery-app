@@ -33,8 +33,9 @@ class InputObservacoes extends StatelessWidget {
                   decoration:
                       BoxDecoration(border: Border.all(color: Colors.grey)),
                   child: TextField(
+                    keyboardType: TextInputType.text,
                     controller: textObservacao,
-                    maxLines: 3,
+                    maxLines: 2,
                     decoration: const InputDecoration.collapsed(
                       hintText: " ",
                     ),
