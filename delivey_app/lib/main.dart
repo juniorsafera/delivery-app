@@ -8,7 +8,6 @@ import 'package:delivey_app/views/tela_adiconar_carrinho.dart';
 import 'package:flutter/material.dart';
 import 'package:delivey_app/others/rotas.dart';
 import 'package:delivey_app/views/tela_carrinho.dart';
-import 'package:delivey_app/views/tela_inicial.dart';
 import 'package:delivey_app/views/tela_principal.dart';
 import 'package:provider/provider.dart';
 
